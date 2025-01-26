@@ -161,6 +161,23 @@
 
   });
 
+  // Forcer la réinitialisation AOS
+function reinitializeAOS() {
+  if (typeof AOS !== 'undefined') {
+    AOS.refreshHard();
+  }
+}
+
+// Appelez cette fonction après le chargement de la page et lors du scroll
+window.addEventListener('load', reinitializeAOS);
+document.addEventListener('scroll', reinitializeAOS);
+
+// Ajoutez un écouteur pour les clics de navigation
+document.querySelectorAll('#navmenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    setTimeout(reinitializeAOS, 100);
+  });
+});
   /**
    * Correct scrolling position upon page load for URLs containing hash links.
    */
